@@ -1,5 +1,6 @@
 package app.shigenawa.ass.homerecycler
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -36,13 +37,17 @@ class MainActivity : AppCompatActivity() {
 
         adapter.addAll(HomeData)
 
-      /*  addButton.setOnClickListener {
-            if(!TextUtils.isEmpty((dataText.text.toString()))){
+       addButton.setOnClickListener {
+      /*      if(!TextUtils.isEmpty((dataText.text.toString()))){
                 val task =HomeData()
             }
-        }
-        
        */
+           val registerPage=Intent(this,RegisterActivity::class.java)
+           startActivity(registerPage)
+           finish()
+        }
+
+
     }
 
 
