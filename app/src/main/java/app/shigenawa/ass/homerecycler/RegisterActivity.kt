@@ -32,7 +32,8 @@ class RegisterActivity : AppCompatActivity() {
         val time:Time?=read()
 
        val DataFormat  =SimpleDateFormat("yyyy/MM/dd").format(Date())
-      // dataText.text=DataFormat
+      dateShowText.text=DataFormat.toString()
+        saveDate(DataFormat)
        // val dateGet=LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"))
 
        // dataText.text=todayDate()
@@ -41,7 +42,11 @@ class RegisterActivity : AppCompatActivity() {
         if(time!=null){
             val uried: Uri= Uri.parse(time.uri)
             imageView.setImageURI(uried)
+
+            dateShowText.text=time.timeData
         }
+
+
 
         val button=findViewById<Button>(R.id.button)
         button.setOnClickListener {
@@ -53,16 +58,34 @@ class RegisterActivity : AppCompatActivity() {
         realm.close()
     }
 
+    fun saveDate(date: String){
+        val time:Time?=read()
 
-    fun save(uri: String){
+        realm.executeTransaction {
+            if (time != null) {
+                time.timeData=date
+            }else{
+                val newdate:Time=realm.createObject(Time::class.java)
+                newdate.timeData=date
+            }
+        }
+    }
+
+
+    fun saveUri(uri: String){
         val time:Time?=read()
         //保存する処理
         realm.executeTransaction {
             if (time != null) {
                 time.uri=uri
+               // time.timeData=timeData
             }else{
-                val newItem: Time=realm.createObject(Time::class.java)
-                newItem.uri=uri
+                val newTtem: Time=realm.createObject(Time::class.java)
+                newTtem.uri=uri
+
+             //   val newTimeData: Time=realm.createObject(Time::class.java)
+                //   newTimeData.timeData=timeData
+
             }
             Snackbar.make(imageView,"保存しました", Snackbar.LENGTH_SHORT).show()
         }
@@ -94,7 +117,7 @@ class RegisterActivity : AppCompatActivity() {
                          }
                          */
                         val stringUri:String=uri.toString()
-                        save(stringUri)
+                        saveUri(stringUri)
 
 
 

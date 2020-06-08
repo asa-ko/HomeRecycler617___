@@ -9,18 +9,18 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="311dp"
-        android:layout_height="402dp"
+        android:layout_width="312dp"
+        android:layout_height="391dp"
         android:layout_marginStart="55dp"
         android:layout_marginTop="68dp"
         android:layout_marginEnd="55dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="235dp"
         android:background="#80FFFFFF"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/dateShowText" />
 
     <Button
         android:id="@+id/button"
@@ -36,12 +36,17 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
-        android:id="@+id/dataShowText"
-        android:layout_width="161dp"
-        android:layout_height="37dp"
+        android:id="@+id/dateShowText"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="41dp"
         android:text="月日"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="117dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

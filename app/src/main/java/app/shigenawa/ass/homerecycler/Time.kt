@@ -9,5 +9,6 @@ public open class Time(
    //open var imageId: Int=0,
    // open var dataId: String ="",
     public open var uri:String?=null,
-    public open var timeData: Date=Date(System.currentTimeMillis())
+   // public open var timeData: Date=Date(System.currentTimeMillis())
+    public open var timeData:String?=null
 ) :RealmObject(){}
