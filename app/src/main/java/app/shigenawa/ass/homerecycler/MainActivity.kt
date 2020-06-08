@@ -5,14 +5,23 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.home_data.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    val HomeData:List<HomeData> = listOf(
+    val DataFormat  = SimpleDateFormat("yyyy/MM/dd").format(Date())
+   // val dateText=intent.getStringExtra("date")
+    //val date1=dateText.toString()
 
-        HomeData("6月3日"),
+    val Time:List<Time> = listOf(
+
+        Time(DataFormat)
+
+     /*  HomeData("6月3日"),
         HomeData("6月2日"),
         HomeData("6月1日"),
         HomeData("5月31"),
@@ -25,26 +34,40 @@ class MainActivity : AppCompatActivity() {
         HomeData("5月24"),
         HomeData("5月23")
 
+      */
+
+
+
+
         )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+      //  val dateText=intent.getStringExtra("date")
+
         val adapter=HomeAdapter(this)
         recyclerView.layoutManager=LinearLayoutManager(this)
         recyclerView.adapter=adapter
 
-        adapter.addAll(HomeData)
+        adapter.addAll(Time)
 
        addButton.setOnClickListener {
-      /*      if(!TextUtils.isEmpty((dataText.text.toString()))){
-                val task =HomeData()
-            }
-       */
-           val registerPage=Intent(this,RegisterActivity::class.java)
+           if(!TextUtils.isEmpty((dataText.text.toString()))){
+                val task =Time(timeData=dataText.text.toString())
+               adapter.addItem(task)
+            }else{
+               Snackbar.make(addButton, "Content is empty", Snackbar.LENGTH_SHORT).show()
+           }
+
+
+
+          val registerPage=Intent(this,RegisterActivity::class.java)
            startActivity(registerPage)
            finish()
+
+         
         }
 
 

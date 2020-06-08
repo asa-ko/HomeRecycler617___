@@ -39,6 +39,8 @@ class RegisterActivity : AppCompatActivity() {
        // dataText.text=todayDate()
         //mainDate()
 
+
+
         if(time!=null){
             val uried: Uri= Uri.parse(time.uri)
             imageView.setImageURI(uried)
@@ -51,6 +53,15 @@ class RegisterActivity : AppCompatActivity() {
         val button=findViewById<Button>(R.id.button)
         button.setOnClickListener {
             selectPhoto()
+        }
+
+        backButton.setOnClickListener {
+            val homePage=Intent(this,MainActivity::class.java)
+
+            homePage.putExtra("date",DataFormat)
+
+            startActivity(homePage)
+            finish()
         }
     }
     override fun onDestroy() {
