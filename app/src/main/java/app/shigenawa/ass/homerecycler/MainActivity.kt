@@ -6,20 +6,27 @@ import android.os.Bundle
 import android.text.TextUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.home_data.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
+
+    val realm: Realm = Realm.getDefaultInstance()
 
     val DataFormat  = SimpleDateFormat("yyyy/MM/dd").format(Date())
    // val dateText=intent.getStringExtra("date")
     //val date1=dateText.toString()
+   // val time:Time?=read()
+     //   val todayDate: String? = time.timeData
+
 
     val Time:List<Time> = listOf(
 
-        Time(DataFormat)
+        Time()
 
      /*  HomeData("6月3日"),
         HomeData("6月2日"),
@@ -35,44 +42,44 @@ class MainActivity : AppCompatActivity() {
         HomeData("5月23")
 
       */
-
-
-
-
         )
+    /*val HomeData:List<HomeData> = listOf(
+            HomeData(DataFormat)
+    )
+     */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-      //  val dateText=intent.getStringExtra("date")
+        val dateText=intent.getStringExtra("date")
 
-        val adapter=HomeAdapter(this)
+       
+        val adapter=HomeAdapter( this)
         recyclerView.layoutManager=LinearLayoutManager(this)
         recyclerView.adapter=adapter
 
         adapter.addAll(Time)
 
        addButton.setOnClickListener {
-           if(!TextUtils.isEmpty((dataText.text.toString()))){
-                val task =Time(timeData=dataText.text.toString())
-               adapter.addItem(task)
-            }else{
-               Snackbar.make(addButton, "Content is empty", Snackbar.LENGTH_SHORT).show()
-           }
+
+           val registerPage = Intent(this, RegisterActivity::class.java)
+          startActivity(registerPage)
+         finish()
 
 
+           val task = Time(timeData = DataFormat.toString())
+           adapter.addItem(task)
 
-          val registerPage=Intent(this,RegisterActivity::class.java)
-           startActivity(registerPage)
-           finish()
+           //    Snackbar.make(addButton, "Content is empty", Snackbar.LENGTH_SHORT).show()
 
-         
-        }
-
-
+       }
     }
-
-
-
+    fun read():Time?{
+        return realm.where(app.shigenawa.ass.homerecycler.Time::class.java).findFirst()
+    }
 }
+
+
+
+

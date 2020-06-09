@@ -8,6 +8,7 @@ import android.view.ViewParent
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.home_data.view.*
+import org.intellij.lang.annotations.JdkConstants
 
 class HomeAdapter(private val context: Context ) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
@@ -51,11 +52,17 @@ class HomeAdapter(private val context: Context ) :
         return items.size
     }
 
+
+   // override fun getItemCount():Int= mItems.size
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item=items[position]
-      //  holder.dataText.text= mHomedata[position].
+     // //  holder.dataText.text= mHomedata[position].
 
         holder.dataText.setText(item.timeData)
+
+      //  holder.dataText.text=mItems[position].timeData
+
     }
 
 
@@ -66,6 +73,12 @@ class HomeAdapter(private val context: Context ) :
 
     fun addItem(time: Time){
         items.add(time)
+        notifyDataSetChanged()
+    }
+
+    private fun removeItem(position: Int){
+        items.removeAt(position)
+        notifyItemRemoved(position)
         notifyDataSetChanged()
     }
 
