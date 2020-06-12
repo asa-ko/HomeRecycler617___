@@ -73,15 +73,24 @@ class MainActivity : AppCompatActivity() {
            //    Snackbar.make(addButton, "Content is empty", Snackbar.LENGTH_SHORT).show()
 
        }
+
+       /* button3.setOnClickListener {
+            val ShowPage=Intent(this,ShowActivity::class.java)
+            startActivity(ShowPage)
+            finish()
+        }
+        */
+
        /* deleteText.setOnClickListener{
            // adapter.removeItem(-1)
         }
-
         */
     }
     fun read():Time?{
         return realm.where(app.shigenawa.ass.homerecycler.Time::class.java).findFirst()
     }
+
+
 }
 
 

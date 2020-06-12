@@ -6,10 +6,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TimePicker
-import android.widget.Toast
+import android.widget.*
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_register.*
@@ -50,8 +47,8 @@ class RegisterActivity : AppCompatActivity() {
 
 
 
-        val button=findViewById<Button>(R.id.button)
-        button.setOnClickListener {
+        val button=findViewById<ImageButton>(R.id.imageView)
+        imageView.setOnClickListener {
             selectPhoto()
         }
 
@@ -62,7 +59,13 @@ class RegisterActivity : AppCompatActivity() {
 
             startActivity(homePage)
             finish()
+
+
         }
+
+
+
+
     }
     override fun onDestroy() {
         super.onDestroy()
@@ -80,6 +83,9 @@ class RegisterActivity : AppCompatActivity() {
                 newdate.timeData=date
             }
         }
+        val showPage=Intent(this,ShowActivity::class.java)
+        showPage.putExtra("date",date)
+        //showPage.putExtra("imageUri",uri)
     }
 
 
@@ -96,7 +102,9 @@ class RegisterActivity : AppCompatActivity() {
 
              //   val newTimeData: Time=realm.createObject(Time::class.java)
                 //   newTimeData.timeData=timeData
-
+                val showPage=Intent(this,ShowActivity::class.java)
+                //showPage.putExtra("date",DataFormat)
+                showPage.putExtra("imageUri",uri)
             }
             Snackbar.make(imageView,"保存しました", Snackbar.LENGTH_SHORT).show()
         }

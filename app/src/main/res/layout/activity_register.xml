@@ -7,45 +7,29 @@
     android:background="#71EDEB"
     tools:context=".MainActivity">
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imageView"
-        android:layout_width="312dp"
-        android:layout_height="391dp"
-        android:layout_marginStart="55dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="44dp"
         android:layout_marginTop="68dp"
-        android:layout_marginEnd="55dp"
-        android:layout_marginBottom="235dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="66dp"
         android:background="#80FFFFFF"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateShowText" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="61dp"
-        android:layout_height="62dp"
-        android:layout_marginEnd="49dp"
-        android:layout_marginBottom="85dp"
-        android:background="@drawable/background_rounded"
-        android:text="+"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="@+id/dateShowText" />
 
     <TextView
         android:id="@+id/dateShowText"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="41dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="107dp"
+        android:layout_marginTop="20dp"
         android:text="月日"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,15 +37,49 @@
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="121dp"
-        android:layout_marginEnd="287dp"
-        android:layout_marginBottom="34dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="5dp"
         android:background="#E3C5FB"
         android:text="戻る"
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <RatingBar
+        android:id="@+id/ratingBar3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/ratingBar4"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar4" />
+
+    <RatingBar
+        android:id="@+id/ratingBar4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="123dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="37dp"
+        android:text="きれいさ"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="@+id/backButton"
+        app:layout_constraintStart_toStartOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="13dp"
+        android:text="昨日からの維持"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="@+id/ratingBar3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
