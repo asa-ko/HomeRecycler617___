@@ -41,7 +41,7 @@ class RegisterActivity : AppCompatActivity() {
 
 
 
-        if(time!=null){
+       if(time!=null){
             val uried: Uri= Uri.parse(time.uri)
             imageView.setImageURI(uried)
 

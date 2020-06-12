@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
 
         val dateText=intent.getStringExtra("date")
 
-       
+
         val adapter=HomeAdapter( this)
         recyclerView.layoutManager=LinearLayoutManager(this)
         recyclerView.adapter=adapter
@@ -64,9 +64,8 @@ class MainActivity : AppCompatActivity() {
        addButton.setOnClickListener {
 
            val registerPage = Intent(this, RegisterActivity::class.java)
-          startActivity(registerPage)
-         finish()
-
+           startActivity(registerPage)
+           finish()
 
            val task = Time(timeData = DataFormat.toString())
            adapter.addItem(task)
@@ -74,6 +73,11 @@ class MainActivity : AppCompatActivity() {
            //    Snackbar.make(addButton, "Content is empty", Snackbar.LENGTH_SHORT).show()
 
        }
+       /* deleteText.setOnClickListener{
+           // adapter.removeItem(-1)
+        }
+
+        */
     }
     fun read():Time?{
         return realm.where(app.shigenawa.ass.homerecycler.Time::class.java).findFirst()

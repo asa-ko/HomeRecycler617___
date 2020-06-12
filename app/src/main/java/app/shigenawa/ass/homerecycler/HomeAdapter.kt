@@ -61,6 +61,7 @@ class HomeAdapter(private val context: Context ) :
 
         holder.dataText.setText(item.timeData)
 
+
       //  holder.dataText.text=mItems[position].timeData
 
     }
@@ -76,14 +77,22 @@ class HomeAdapter(private val context: Context ) :
         notifyDataSetChanged()
     }
 
-    private fun removeItem(position: Int){
+   /* fun removeItem(position: Int){
         items.removeAt(position)
         notifyItemRemoved(position)
         notifyDataSetChanged()
     }
 
+    */
+
     /*class ViewHolder(view: View):RecyclerView.ViewHolder(view){
         val date:TextView= view.dataText
     }*/
+
+    /*interface OnItemClickListener {
+        fun onItemClick(item: Time)
+    }
+
+     */
 
 }
