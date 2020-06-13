@@ -7,6 +7,9 @@ import android.text.TextUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
+import io.realm.RealmResults
+import io.realm.Sort
+import io.realm.kotlin.createObject
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.home_data.*
 import java.text.SimpleDateFormat
@@ -15,7 +18,9 @@ import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
-    val realm: Realm = Realm.getDefaultInstance()
+   private val realm: Realm by lazy {
+       Realm.getDefaultInstance()
+   }
 
     val DataFormat  = SimpleDateFormat("yyyy/MM/dd").format(Date())
     // val dateText=intent.getStringExtra("date")
@@ -24,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     //   val todayDate: String? = time.timeData
 
 
-    val Time:List<Time> = listOf(
+    /*val Time:List<Time> = listOf(
 
         Time()
 
@@ -43,6 +48,8 @@ class MainActivity : AppCompatActivity() {
 
          */
     )
+
+     */
     /*val HomeData:List<HomeData> = listOf(
             HomeData(DataFormat)
     )
@@ -54,31 +61,54 @@ class MainActivity : AppCompatActivity() {
 
         val dateText=intent.getStringExtra("date")
 
+        val taskList=readAll()
 
-        val adapter=HomeAdapter( this)
+        create(DataFormat)
+
+        val adapter=HomeAdapter( this,taskList,true)
+
+        recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager=LinearLayoutManager(this)
         recyclerView.adapter=adapter
 
-        adapter.addAll(Time)
+      // adapter.addAll(taskList)
 
-        addButton.setOnClickListener {
+      addButton.setOnClickListener {
 
             val registerPage = Intent(this, RegisterActivity::class.java)
             startActivity(registerPage)
             finish()
 
-            val task = Time(timeData = DataFormat.toString())
+         /* val task = Time(timeData = DataFormat.toString())
             adapter.addItem(task)
+
+          */
 
             //    Snackbar.make(addButton, "Content is empty", Snackbar.LENGTH_SHORT).show()
 
         }
+
+
+
+
         /* deleteText.setOnClickListener{
             // adapter.removeItem(-1)
          }
 
          */
     }
+
+    fun create(content:String){
+        realm.executeTransaction {
+            val task=it.createObject(Time::class.java,UUID.randomUUID().toString())
+            task.timeData=content
+        }
+    }
+
+    fun readAll(): RealmResults<Time> {
+        return realm.where(Time::class.java).findAll().sort("createdAt", Sort.ASCENDING)
+    }
+
     fun read():Time?{
         return realm.where(app.shigenawa.ass.homerecycler.Time::class.java).findFirst()
     }

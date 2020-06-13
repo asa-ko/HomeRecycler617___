@@ -7,21 +7,25 @@ import android.view.ViewGroup
 import android.view.ViewParent
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import io.realm.OrderedRealmCollection
+import io.realm.RealmRecyclerViewAdapter
 import kotlinx.android.synthetic.main.home_data.view.*
 import org.intellij.lang.annotations.JdkConstants
 
 class HomeAdapter(
-    private val context: Context
+    private val context: Context,
+    private val taskList:OrderedRealmCollection<Time>,
+    private val autoUpdate: Boolean
 ) :
-    RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
-    val items:MutableList<Time> = mutableListOf()
+    RealmRecyclerViewAdapter<Time,HomeAdapter.ViewHolder>(taskList,autoUpdate){
+    //val items:MutableList<Time> = mutableListOf()
 
     override fun getItemCount(): Int {
-        return items.size
+        return taskList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item=items[position]
+        val item=taskList[position]
         // //  holder.dataText.text= mHomedata[position].
         holder.dataText.setText(item.timeData)
         //  holder.dataText.text=mItems[position].timeData
@@ -36,16 +40,19 @@ class HomeAdapter(
         val dataText: TextView =view.findViewById(R.id.dateText)
     }
 
-    fun addAll(items:List<Time>){
-        this.items.addAll(items)
+    fun addAll(taskList: OrderedRealmCollection<Time>){
+        this.taskList.addAll(taskList)
         notifyDataSetChanged()
     }
 
     fun addItem(time: Time){
-        items.add(time)
+        taskList.add(time)
         notifyDataSetChanged()
     }
 
+
+
+    /*
     private var mRecyclerView:RecyclerView?=null
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
@@ -57,6 +64,8 @@ class HomeAdapter(
         super.onDetachedFromRecyclerView(recyclerView)
         mRecyclerView=null
     }
+
+     */
 
 
     /* fun removeItem(position: Int){
