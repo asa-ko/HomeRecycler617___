@@ -5,19 +5,12 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.*
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.home_data.*
 import java.util.Date
-import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
     val realm:Realm=Realm.getDefaultInstance()
@@ -27,10 +20,12 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         val time:Time?=read()
+        var starNum1:Float
+        var starNum2:Float
 
        val DataFormat  =SimpleDateFormat("yyyy/MM/dd").format(Date())
       dateShowText.text=DataFormat.toString()
-        saveDate(DataFormat)
+        //saveDate(DataFormat)
        // val dateGet=LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"))
 
        // dataText.text=todayDate()
@@ -40,7 +35,13 @@ class RegisterActivity : AppCompatActivity() {
 
        if(time!=null){
             val uried: Uri= Uri.parse(time.uri)
+           val ratinged1:Float?=time.ratingValue1
+           val ratinged2:Float?=time.ratingValue2
+
             imageView.setImageURI(uried)
+           registerRatingText1.text=ratinged1.toString()
+           registerRatingText2.text=ratinged2.toString()
+          // registerRatingBar1.rating=ratinged1
 
             dateShowText.text=time.timeData
         }
@@ -51,6 +52,14 @@ class RegisterActivity : AppCompatActivity() {
         imageView.setOnClickListener {
             selectPhoto()
         }
+
+       saveButton.setOnClickListener {
+            saveDate(DataFormat)
+            saveRating(registerRatingBar1.rating,registerRatingBar2.rating)
+            nextPage()
+        }
+
+
 
         backButton.setOnClickListener {
             val homePage=Intent(this,MainActivity::class.java)
@@ -64,7 +73,15 @@ class RegisterActivity : AppCompatActivity() {
         }
 
 
+        registerRatingBar1.setOnRatingBarChangeListener { registerRaingBar1,rating, formUser ->
+            val startNum1: Float = registerRatingBar1.rating
+            registerRatingText1.text = startNum1.toString()
+        }
 
+        registerRatingBar2.setOnRatingBarChangeListener { registerRatingBar2, rating, fromUser ->
+            val starNum2:Float=registerRatingBar2.rating
+            registerRatingText2.text=starNum2.toString()
+        }
 
     }
     override fun onDestroy() {
@@ -106,12 +123,40 @@ class RegisterActivity : AppCompatActivity() {
                 //showPage.putExtra("date",DataFormat)
                 showPage.putExtra("imageUri",uri)
             }
-            Snackbar.make(imageView,"保存しました", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(imageView,"画像を保存しました", Snackbar.LENGTH_SHORT).show()
         }
         //保存したuriのStringをUriに戻す
         val newUri:Uri= Uri.parse(uri)
 
     }
+
+    fun saveRating(rating1:Float,rating2:Float){
+        val time:Time?=read()
+
+        realm.executeTransaction {
+            if (time != null) {
+                time.ratingValue1=rating1
+                time.ratingValue2=rating2
+            }else{
+                val newRating1:Time=realm.createObject(Time::class.java)
+                val newRating2:Time=realm.createObject(Time::class.java)
+                newRating1.ratingValue1=rating1
+                newRating2.ratingValue2=rating2
+            }
+        }
+        val showPage=Intent(this,ShowActivity::class.java)
+        showPage.putExtra("rating1",rating1)
+        showPage.putExtra("rating2",rating2)
+        //showPage.putExtra("imageUri",uri)
+    }
+
+    fun nextPage(){
+       val showPage=Intent(this,ShowActivity::class.java)
+        startActivity(showPage)
+        finish()
+    }
+
+
 
 
     fun read():Time?{
@@ -198,6 +243,7 @@ class RegisterActivity : AppCompatActivity() {
         newFragment.show(supportFragmentManager,"timePicker")
     }
    */
+
 
 }
 

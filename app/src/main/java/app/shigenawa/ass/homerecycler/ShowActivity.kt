@@ -5,26 +5,37 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.net.toUri
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_register.*
 
 class ShowActivity : AppCompatActivity() {
+    val realm: Realm = Realm.getDefaultInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_show)
 
-        val dateText=intent.getStringExtra("date")
-        val imageUri=intent.getStringExtra("imageUri")
+        val time: Time? = read()
+        //val dateText = intent.getStringExtra("date")
+        //val imageUri = intent.getStringExtra("imageUri")
 
-       val  uri:Uri=imageUri.toUri()
+        if(time!=null) {
+            val uried: Uri = Uri.parse(time.uri)
+            val dated:String?=time.timeData
 
-        dateShowText.setText(dateText)
-        imageView.setImageURI(uri)
+          //  dateShowText.text=dateText
+           // imageView.setImageURI(uried)
+        }
+
 
         backButton.setOnClickListener {
-            val MainPage=Intent(this,MainActivity::class.java)
-            startActivity(MainPage)
+            val HomePage = Intent(this, MainActivity::class.java)
+            startActivity(HomePage)
             finish()
         }
     }
+        fun read():Time?{
+            return realm.where(Time::class.java).findFirst()
+        }
+
 }
