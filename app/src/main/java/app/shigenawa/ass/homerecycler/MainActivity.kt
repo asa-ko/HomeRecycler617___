@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
@@ -22,7 +23,9 @@ class MainActivity : AppCompatActivity() {
        Realm.getDefaultInstance()
    }
 
-    val DataFormat  = SimpleDateFormat("yyyy/MM/dd").format(Date())
+   val DateFormat  = SimpleDateFormat("yyyy/MM/dd").format(Date())
+   // var DateFormat:String="aaa"
+
     // val dateText=intent.getStringExtra("date")
     //val date1=dateText.toString()
     // val time:Time?=read()
@@ -61,11 +64,29 @@ class MainActivity : AppCompatActivity() {
 
         val dateText=intent.getStringExtra("date")
 
+        val time:Time?=read()
+       /* if(time!=null){
+            DateFormat=time.timeData
+        }
+
+        */
+
         val taskList=readAll()
 
-        create(DataFormat)
+        if(taskList.isEmpty()){
+            create(DateFormat)
+        }
 
-        val adapter=HomeAdapter( this,taskList,true)
+       // val adapter=HomeAdapter( this,taskList,true)
+
+        val adapter =
+            HomeAdapter(this, taskList, object : HomeAdapter.OnItemClickListener {
+                override fun onItemClick(item: Time) {
+                    // クリック時の処理
+                    Toast.makeText(applicationContext, item.timeData + "を削除しました", Toast.LENGTH_SHORT).show()
+                    delete(item.id)
+                }
+            }, true)
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager=LinearLayoutManager(this)
@@ -73,7 +94,7 @@ class MainActivity : AppCompatActivity() {
 
       // adapter.addAll(taskList)
 
-      addButton.setOnClickListener {
+        addButton.setOnClickListener {
 
             val registerPage = Intent(this, RegisterActivity::class.java)
             startActivity(registerPage)
@@ -88,14 +109,6 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
-
-
-        /* deleteText.setOnClickListener{
-            // adapter.removeItem(-1)
-         }
-
-         */
     }
 
     fun create(content:String){
@@ -107,6 +120,40 @@ class MainActivity : AppCompatActivity() {
 
     fun readAll(): RealmResults<Time> {
         return realm.where(Time::class.java).findAll().sort("createdAt", Sort.ASCENDING)
+    }
+
+    fun update(id: String, content: String) {
+        realm.executeTransaction {
+            val task = realm.where(Time::class.java).equalTo("id", id).findFirst()
+                ?: return@executeTransaction
+            task.timeData = content
+        }
+    }
+
+    fun update(task: Time, content: String) {
+        realm.executeTransaction {
+            task.timeData = content
+        }
+    }
+
+    fun delete(id: String) {
+        realm.executeTransaction {
+            val task = realm.where(Time::class.java).equalTo("id", id).findFirst()
+                ?: return@executeTransaction
+            task.deleteFromRealm()
+        }
+    }
+
+    fun delete(task: Time) {
+        realm.executeTransaction {
+            task.deleteFromRealm()
+        }
+    }
+
+    fun deleteAll() {
+        realm.executeTransaction {
+            realm.deleteAll()
+        }
     }
 
     fun read():Time?{

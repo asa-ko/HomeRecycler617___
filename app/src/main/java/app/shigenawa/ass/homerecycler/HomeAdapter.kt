@@ -5,16 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewParent
+import android.widget.AdapterView
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.OrderedRealmCollection
 import io.realm.RealmRecyclerViewAdapter
+import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.home_data.view.*
 import org.intellij.lang.annotations.JdkConstants
 
 class HomeAdapter(
     private val context: Context,
     private val taskList:OrderedRealmCollection<Time>,
+    private var listener: OnItemClickListener,
     private val autoUpdate: Boolean
 ) :
     RealmRecyclerViewAdapter<Time,HomeAdapter.ViewHolder>(taskList,autoUpdate){
@@ -27,6 +31,15 @@ class HomeAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item=taskList[position]
         // //  holder.dataText.text= mHomedata[position].
+
+        holder.deleteText.setOnClickListener {
+            listener.onItemClick(item)
+        }
+
+        holder.addButton.setOnClickListener {
+
+        }
+
         holder.dataText.setText(item.timeData)
         //  holder.dataText.text=mItems[position].timeData
     }
@@ -38,7 +51,15 @@ class HomeAdapter(
 
     class ViewHolder(view: View):RecyclerView.ViewHolder(view){
         val dataText: TextView =view.findViewById(R.id.dateText)
+        val deleteText: TextView=view.deleteText
+        val addButton:Button=view.addButton
     }
+
+    interface OnItemClickListener {
+        fun onItemClick(item: Time)
+    }
+
+
 
     fun addAll(taskList: OrderedRealmCollection<Time>){
         this.taskList.addAll(taskList)
