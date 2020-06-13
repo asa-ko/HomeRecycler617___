@@ -7,7 +7,7 @@
     android:background="#90CAF9">
 
     <TextView
-        android:id="@+id/dataText"
+        android:id="@+id/dateText"
         android:layout_width="80sp"
         android:layout_height="41dp"
         android:layout_marginStart="7dp"
@@ -29,7 +29,7 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/deleteText"
-        app:layout_constraintStart_toEndOf="@+id/dataText" />
+        app:layout_constraintStart_toEndOf="@+id/dateText" />
 
     <TextView
         android:id="@+id/deleteText"

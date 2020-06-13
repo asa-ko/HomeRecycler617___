@@ -7,6 +7,9 @@ import android.text.TextUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
+import io.realm.RealmObject
+import io.realm.RealmResults
+import io.realm.Sort
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.home_data.*
 import java.text.SimpleDateFormat
@@ -15,18 +18,23 @@ import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
-    val realm: Realm = Realm.getDefaultInstance()
+   // val realm: Realm = Realm.getDefaultInstance()
+
+    private val realm:Realm by lazy {
+        Realm.getDefaultInstance()
+    }
 
     val DataFormat  = SimpleDateFormat("yyyy/MM/dd").format(Date())
+
    // val dateText=intent.getStringExtra("date")
     //val date1=dateText.toString()
    // val time:Time?=read()
      //   val todayDate: String? = time.timeData
 
 
-    val Time:List<Time> = listOf(
+    val Time1:List<Time> = listOf(
 
-        Time()
+        //Time()
 
      /*  HomeData("6月3日"),
         HomeData("6月2日"),
@@ -43,29 +51,37 @@ class MainActivity : AppCompatActivity() {
 
       */
         )
-    /*val HomeData:List<HomeData> = listOf(
+
+
+    val HomeData:List<HomeData> = listOf(
             HomeData(DataFormat)
     )
-     */
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val dateText=intent.getStringExtra("date")
+       // val dateText=intent.getStringExtra("date")
+
+        val timeList=readAll()
 
 
-        val adapter=HomeAdapter( this)
+
+
+        val adapter=HomeAdapter( this,timeList ,true)
+
+        recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager=LinearLayoutManager(this)
         recyclerView.adapter=adapter
 
-        adapter.addAll(Time)
+       // adapter.addAll(Time)
 
        addButton.setOnClickListener {
 
            val registerPage = Intent(this, RegisterActivity::class.java)
-           startActivity(registerPage)
-           finish()
+          // startActivity(registerPage)
+          /// finish()
 
            val task = Time(timeData = DataFormat.toString())
            adapter.addItem(task)
@@ -81,14 +97,37 @@ class MainActivity : AppCompatActivity() {
         }
         */
 
-       /* deleteText.setOnClickListener{
-           // adapter.removeItem(-1)
+       /*deleteText.setOnClickListener{
+           adapter.removeItem(0)
         }
+
         */
+
+
+     /*   fun Read(){
+            val all=realm.where(RealmObject::class.java).findAll()
+            val sortAll=all.sort("date",Sort.DESCENDING)
+
+            adapter.addItem(HomeData(data = DataFormat))
+        }
+
+      */
     }
     fun read():Time?{
         return realm.where(app.shigenawa.ass.homerecycler.Time::class.java).findFirst()
     }
+
+    fun readAll():RealmResults<Time>{
+        return realm.where(Time::class.java).findAll()
+    }
+   /* private fun Read(){
+        val all=realm.where(RealmObject::class.java).findAll()
+        val sortAll=all.sort("date",Sort.DESCENDING)
+
+        adapter.add
+    }
+
+    */
 
 
 }

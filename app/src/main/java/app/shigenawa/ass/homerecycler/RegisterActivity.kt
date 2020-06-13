@@ -6,14 +6,17 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_register.*
-import java.util.Date
 import java.text.SimpleDateFormat
+import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
     val realm:Realm=Realm.getDefaultInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +26,7 @@ class RegisterActivity : AppCompatActivity() {
         var starNum1:Float
         var starNum2:Float
 
-       val DataFormat  =SimpleDateFormat("yyyy/MM/dd").format(Date())
+       val DataFormat  =SimpleDateFormat("yyyy/MM/dd", Locale.JAPAN).format(Date())
       dateShowText.text=DataFormat.toString()
         //saveDate(DataFormat)
        // val dateGet=LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"))
@@ -65,6 +68,8 @@ class RegisterActivity : AppCompatActivity() {
             val homePage=Intent(this,MainActivity::class.java)
 
             homePage.putExtra("date",DataFormat)
+
+            val task = Time(timeData = DataFormat.toString())
 
             startActivity(homePage)
             finish()
