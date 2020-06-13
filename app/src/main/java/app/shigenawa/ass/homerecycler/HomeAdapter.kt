@@ -10,12 +10,40 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.home_data.view.*
 import org.intellij.lang.annotations.JdkConstants
 
-class HomeAdapter(private val context: Context ) :
+class HomeAdapter(
+    private val context: Context
+) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
     val items:MutableList<Time> = mutableListOf()
 
+    override fun getItemCount(): Int {
+        return items.size
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item=items[position]
+        // //  holder.dataText.text= mHomedata[position].
+        holder.dataText.setText(item.timeData)
+        //  holder.dataText.text=mItems[position].timeData
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view= LayoutInflater.from(context).inflate(R.layout.home_data,parent,false)
+        return ViewHolder(view)
+    }
+
     class ViewHolder(view: View):RecyclerView.ViewHolder(view){
         val dataText: TextView =view.findViewById(R.id.dateText)
+    }
+
+    fun addAll(items:List<Time>){
+        this.items.addAll(items)
+        notifyDataSetChanged()
+    }
+
+    fun addItem(time: Time){
+        items.add(time)
+        notifyDataSetChanged()
     }
 
     private var mRecyclerView:RecyclerView?=null
@@ -30,52 +58,6 @@ class HomeAdapter(private val context: Context ) :
         mRecyclerView=null
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view= LayoutInflater.from(context).inflate(R.layout.home_data,parent,false)
-        return ViewHolder(view)
-
-        /*  val layoutInflater = LayoutInflater.from(context)
-          val mView = layoutInflater.inflate(R.layout.home_data, parent, false)
-
-          mView.setOnClickListener { view ->
-              mRecyclerView?.let {
-                  itemClickListener.onItemClick(view, it.getChildAdapterPosition(view))
-              }
-          }
-
-          return ViewHolder(mView)
-
-         */
-    }
-
-    override fun getItemCount(): Int {
-        return items.size
-    }
-
-
-    // override fun getItemCount():Int= mItems.size
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item=items[position]
-        // //  holder.dataText.text= mHomedata[position].
-
-        holder.dataText.setText(item.timeData)
-
-
-        //  holder.dataText.text=mItems[position].timeData
-
-    }
-
-
-    fun addAll(items:List<Time>){
-        this.items.addAll(items)
-        notifyDataSetChanged()
-    }
-
-    fun addItem(time: Time){
-        items.add(time)
-        notifyDataSetChanged()
-    }
 
     /* fun removeItem(position: Int){
          items.removeAt(position)
