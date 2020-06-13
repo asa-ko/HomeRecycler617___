@@ -7,9 +7,6 @@ import android.text.TextUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
-import io.realm.RealmObject
-import io.realm.RealmResults
-import io.realm.Sort
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.home_data.*
 import java.text.SimpleDateFormat
@@ -18,120 +15,71 @@ import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
-   // val realm: Realm = Realm.getDefaultInstance()
-
-    private val realm:Realm by lazy {
-        Realm.getDefaultInstance()
-    }
+    val realm: Realm = Realm.getDefaultInstance()
 
     val DataFormat  = SimpleDateFormat("yyyy/MM/dd").format(Date())
-
-   // val dateText=intent.getStringExtra("date")
+    // val dateText=intent.getStringExtra("date")
     //val date1=dateText.toString()
-   // val time:Time?=read()
-     //   val todayDate: String? = time.timeData
+    // val time:Time?=read()
+    //   val todayDate: String? = time.timeData
 
 
-    val Time1:List<Time> = listOf(
+    val Time:List<Time> = listOf(
 
-        //Time()
+        Time()
 
-     /*  HomeData("6月3日"),
-        HomeData("6月2日"),
-        HomeData("6月1日"),
-        HomeData("5月31"),
-        HomeData("5月30"),
-        HomeData("5月29"),
-        HomeData("5月28"),
-        HomeData("5月27"),
-        HomeData("5月26"),
-        HomeData("5月25"),
-        HomeData("5月24"),
-        HomeData("5月23")
+        /*  HomeData("6月3日"),
+           HomeData("6月2日"),
+           HomeData("6月1日"),
+           HomeData("5月31"),
+           HomeData("5月30"),
+           HomeData("5月29"),
+           HomeData("5月28"),
+           HomeData("5月27"),
+           HomeData("5月26"),
+           HomeData("5月25"),
+           HomeData("5月24"),
+           HomeData("5月23")
 
-      */
-        )
-
-
-    val HomeData:List<HomeData> = listOf(
+         */
+    )
+    /*val HomeData:List<HomeData> = listOf(
             HomeData(DataFormat)
     )
-
+     */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-       // val dateText=intent.getStringExtra("date")
-
-        val timeList=readAll()
+        val dateText=intent.getStringExtra("date")
 
 
-
-
-        val adapter=HomeAdapter( this,timeList ,true)
-
-        recyclerView.setHasFixedSize(true)
+        val adapter=HomeAdapter( this)
         recyclerView.layoutManager=LinearLayoutManager(this)
         recyclerView.adapter=adapter
 
-       // adapter.addAll(Time)
+        adapter.addAll(Time)
 
-       addButton.setOnClickListener {
+        addButton.setOnClickListener {
 
-           val registerPage = Intent(this, RegisterActivity::class.java)
-          // startActivity(registerPage)
-          /// finish()
-
-           val task = Time(timeData = DataFormat.toString())
-           adapter.addItem(task)
-
-           //    Snackbar.make(addButton, "Content is empty", Snackbar.LENGTH_SHORT).show()
-
-       }
-
-       /* button3.setOnClickListener {
-            val ShowPage=Intent(this,ShowActivity::class.java)
-            startActivity(ShowPage)
+            val registerPage = Intent(this, RegisterActivity::class.java)
+            startActivity(registerPage)
             finish()
+
+            val task = Time(timeData = DataFormat.toString())
+            adapter.addItem(task)
+
+            //    Snackbar.make(addButton, "Content is empty", Snackbar.LENGTH_SHORT).show()
+
         }
-        */
+        /* deleteText.setOnClickListener{
+            // adapter.removeItem(-1)
+         }
 
-       /*deleteText.setOnClickListener{
-           adapter.removeItem(0)
-        }
-
-        */
-
-
-     /*   fun Read(){
-            val all=realm.where(RealmObject::class.java).findAll()
-            val sortAll=all.sort("date",Sort.DESCENDING)
-
-            adapter.addItem(HomeData(data = DataFormat))
-        }
-
-      */
+         */
     }
     fun read():Time?{
         return realm.where(app.shigenawa.ass.homerecycler.Time::class.java).findFirst()
     }
-
-    fun readAll():RealmResults<Time>{
-        return realm.where(Time::class.java).findAll()
-    }
-   /* private fun Read(){
-        val all=realm.where(RealmObject::class.java).findAll()
-        val sortAll=all.sort("date",Sort.DESCENDING)
-
-        adapter.add
-    }
-
-    */
-
-
 }
-
-
-
-

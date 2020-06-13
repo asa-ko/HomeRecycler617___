@@ -4,34 +4,18 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewParent
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import io.realm.OrderedRealmCollection
-import io.realm.Realm
-import io.realm.RealmRecyclerViewAdapter
-import io.realm.RealmResults
-import kotlinx.android.synthetic.main.activity_show.view.*
-import java.text.SimpleDateFormat
-import java.util.*
+import kotlinx.android.synthetic.main.home_data.view.*
+import org.intellij.lang.annotations.JdkConstants
 
-class HomeAdapter(
-    private val context: Context,
-    private var timeList: OrderedRealmCollection<Time>,
-    private  val autoUpdate: Boolean
-) :
-    RealmRecyclerViewAdapter<Time,HomeAdapter.ViewHolder>(timeList,autoUpdate){
-
-    val items:MutableList<HomeData> = mutableListOf()
-
-    //private val rResults:RealmResults<Time>=realmResults
+class HomeAdapter(private val context: Context ) :
+    RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
+    val items:MutableList<Time> = mutableListOf()
 
     class ViewHolder(view: View):RecyclerView.ViewHolder(view){
-        var dateText: TextView =view.findViewById(R.id.dateText)
-       /* init {
-            dateText=view.dateShowText
-        }
-
-        */
+        val dataText: TextView =view.findViewById(R.id.dateText)
     }
 
     private var mRecyclerView:RecyclerView?=null
@@ -46,61 +30,60 @@ class HomeAdapter(
         mRecyclerView=null
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val v= LayoutInflater.from(context).inflate(R.layout.home_data,viewGroup,false)
-        return ViewHolder(v)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view= LayoutInflater.from(context).inflate(R.layout.home_data,parent,false)
+        return ViewHolder(view)
 
-      /*  val layoutInflater = LayoutInflater.from(context)
-        val mView = layoutInflater.inflate(R.layout.home_data, parent, false)
+        /*  val layoutInflater = LayoutInflater.from(context)
+          val mView = layoutInflater.inflate(R.layout.home_data, parent, false)
 
-        mView.setOnClickListener { view ->
-            mRecyclerView?.let {
-                itemClickListener.onItemClick(view, it.getChildAdapterPosition(view))
-            }
-        }
+          mView.setOnClickListener { view ->
+              mRecyclerView?.let {
+                  itemClickListener.onItemClick(view, it.getChildAdapterPosition(view))
+              }
+          }
 
-        return ViewHolder(mView)
+          return ViewHolder(mView)
 
-       */
+         */
     }
 
     override fun getItemCount(): Int {
-        return timeList.size
+        return items.size
     }
 
 
-   // override fun getItemCount():Int= mItems.size
+    // override fun getItemCount():Int= mItems.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val time:Time=timeList?.get(position)?:return
-     // //  holder.dataText.text= mHomedata[position].
+        val item=items[position]
+        // //  holder.dataText.text= mHomedata[position].
 
-     //   holder.dateText.setText(time.timeData)
+        holder.dataText.setText(item.timeData)
 
-        holder.dateText.text=SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.JAPANESE).format(time.timeData)
 
-      //  holder.dataText.text=mItems[position].timeData
+        //  holder.dataText.text=mItems[position].timeData
 
     }
 
 
     fun addAll(items:List<Time>){
-        this.timeList.addAll(items)
+        this.items.addAll(items)
         notifyDataSetChanged()
     }
 
     fun addItem(time: Time){
-        timeList.add(time)
+        items.add(time)
         notifyDataSetChanged()
     }
 
-    fun removeItem(position: Int){
-        items.removeAt(position)
-        notifyItemRemoved(position)
-        notifyDataSetChanged()
-    }
+    /* fun removeItem(position: Int){
+         items.removeAt(position)
+         notifyItemRemoved(position)
+         notifyDataSetChanged()
+     }
 
-
+     */
 
     /*class ViewHolder(view: View):RecyclerView.ViewHolder(view){
         val date:TextView= view.dataText
