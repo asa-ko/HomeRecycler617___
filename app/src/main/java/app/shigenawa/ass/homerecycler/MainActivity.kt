@@ -73,6 +73,7 @@ class MainActivity : AppCompatActivity() {
 
         val taskList=readAll()
 
+
         if(taskList.isEmpty()){
             create(DateFormat)
         }
@@ -95,6 +96,8 @@ class MainActivity : AppCompatActivity() {
       // adapter.addAll(taskList)
 
         addButton.setOnClickListener {
+
+            create(DateFormat)
 
             val registerPage = Intent(this, RegisterActivity::class.java)
             startActivity(registerPage)

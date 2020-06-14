@@ -36,9 +36,9 @@ class HomeAdapter(
             listener.onItemClick(item)
         }
 
-        holder.addButton.setOnClickListener {
+      /*  holder.addButton.setOnClickListener {
 
-        }
+        }*/
 
         holder.dataText.setText(item.timeData)
         //  holder.dataText.text=mItems[position].timeData
@@ -52,7 +52,7 @@ class HomeAdapter(
     class ViewHolder(view: View):RecyclerView.ViewHolder(view){
         val dataText: TextView =view.findViewById(R.id.dateText)
         val deleteText: TextView=view.deleteText
-        val addButton:Button=view.addButton
+       // val addButton:Button=view.addButton
     }
 
     interface OnItemClickListener {

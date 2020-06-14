@@ -36,7 +36,7 @@ class RegisterActivity : AppCompatActivity() {
 
 
 
-       if(time!=null){
+       /*if(time!=null){
             val uried: Uri= Uri.parse(time.uri)
            val ratinged1:Float?=time.ratingValue1
            val ratinged2:Float?=time.ratingValue2
@@ -48,6 +48,8 @@ class RegisterActivity : AppCompatActivity() {
 
             dateShowText.text=time.timeData
         }
+
+        */
 
 
 
@@ -61,7 +63,6 @@ class RegisterActivity : AppCompatActivity() {
             saveRating(registerRatingBar1.rating,registerRatingBar2.rating)
             nextPage()
         }
-
 
 
         backButton.setOnClickListener {
