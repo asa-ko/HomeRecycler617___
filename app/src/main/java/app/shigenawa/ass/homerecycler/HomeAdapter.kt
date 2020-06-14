@@ -19,7 +19,8 @@ class HomeAdapter(
     private val context: Context,
     private val taskList:OrderedRealmCollection<Time>,
     private var listener: OnItemClickListener,
-    private val autoUpdate: Boolean
+    private val autoUpdate: Boolean,
+    private val transitioner: OnButtonClickListener
 ) :
     RealmRecyclerViewAdapter<Time,HomeAdapter.ViewHolder>(taskList,autoUpdate){
     //val items:MutableList<Time> = mutableListOf()
@@ -36,9 +37,9 @@ class HomeAdapter(
             listener.onItemClick(item)
         }
 
-      /*  holder.addButton.setOnClickListener {
-
-        }*/
+        holder.showButton.setOnClickListener {
+                transitioner.Transition(item)
+        }
 
         holder.dataText.setText(item.timeData)
         //  holder.dataText.text=mItems[position].timeData
@@ -52,11 +53,16 @@ class HomeAdapter(
     class ViewHolder(view: View):RecyclerView.ViewHolder(view){
         val dataText: TextView =view.findViewById(R.id.dateText)
         val deleteText: TextView=view.deleteText
+        val showButton: Button=view.showButton
        // val addButton:Button=view.addButton
     }
 
     interface OnItemClickListener {
         fun onItemClick(item: Time)
+    }
+
+    interface OnButtonClickListener{
+        fun Transition(item: Time)
     }
 
 

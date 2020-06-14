@@ -87,7 +87,13 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, item.timeData + "を削除しました", Toast.LENGTH_SHORT).show()
                     delete(item.id)
                 }
-            }, true)
+            }, true,
+            object : HomeAdapter.OnButtonClickListener{
+                override fun Transition(item: Time) {
+                    Toast.makeText(applicationContext,item.timeData+"を表示します",Toast.LENGTH_SHORT).show()
+                    trans(item.id)
+                }
+            })
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager=LinearLayoutManager(this)
@@ -161,5 +167,11 @@ class MainActivity : AppCompatActivity() {
 
     fun read():Time?{
         return realm.where(app.shigenawa.ass.homerecycler.Time::class.java).findFirst()
+    }
+
+    fun trans(id:String){
+        val DataPage=Intent(this,ShowActivity::class.java)
+        startActivity(DataPage)
+        finish()
     }
 }
