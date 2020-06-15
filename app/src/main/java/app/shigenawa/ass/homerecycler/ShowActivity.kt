@@ -24,7 +24,7 @@ class ShowActivity : AppCompatActivity() {
             val dated:String?=time.timeData
 
           //  dateShowText.text=dateText
-           // imageView.setImageURI(uried)
+          //  imageView.setImageURI(uried)
         }
 
 

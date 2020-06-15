@@ -2,7 +2,9 @@ package app.shigenawa.ass.homerecycler
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 import java.util.*
+
 
  open class Time(
     @PrimaryKey open var id: String=UUID.randomUUID().toString(),

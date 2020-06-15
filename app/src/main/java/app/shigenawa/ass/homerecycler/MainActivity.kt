@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
        Realm.getDefaultInstance()
    }
 
-   val DateFormat  = SimpleDateFormat("yyyy/MM/dd").format(Date())
+   val DateFormat  = SimpleDateFormat("yyyy/MM/dd", Locale.JAPANESE).format(Date())
    // var DateFormat:String="aaa"
 
     // val dateText=intent.getStringExtra("date")
@@ -31,32 +31,6 @@ class MainActivity : AppCompatActivity() {
     // val time:Time?=read()
     //   val todayDate: String? = time.timeData
 
-
-    /*val Time:List<Time> = listOf(
-
-        Time()
-
-        /*  HomeData("6月3日"),
-           HomeData("6月2日"),
-           HomeData("6月1日"),
-           HomeData("5月31"),
-           HomeData("5月30"),
-           HomeData("5月29"),
-           HomeData("5月28"),
-           HomeData("5月27"),
-           HomeData("5月26"),
-           HomeData("5月25"),
-           HomeData("5月24"),
-           HomeData("5月23")
-
-         */
-    )
-
-     */
-    /*val HomeData:List<HomeData> = listOf(
-            HomeData(DataFormat)
-    )
-     */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -128,7 +102,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun readAll(): RealmResults<Time> {
-        return realm.where(Time::class.java).findAll().sort("createdAt", Sort.ASCENDING)
+        return realm.where(Time::class.java).findAll().sort("timeData", Sort.DESCENDING)
     }
 
     fun update(id: String, content: String) {

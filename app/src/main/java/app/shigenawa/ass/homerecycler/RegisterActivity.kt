@@ -23,8 +23,8 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         val time:Time?=read()
-        var starNum1:Float
-        var starNum2:Float
+        //var starNum1:Float
+        //var starNum2:Float
 
        val DataFormat  =SimpleDateFormat("yyyy/MM/dd", Locale.JAPAN).format(Date())
       dateShowText.text=DataFormat.toString()
@@ -36,21 +36,21 @@ class RegisterActivity : AppCompatActivity() {
 
 
 
-       /*if(time!=null){
+       if(time!=null){
             val uried: Uri= Uri.parse(time.uri)
            val ratinged1:Float?=time.ratingValue1
            val ratinged2:Float?=time.ratingValue2
 
             imageView.setImageURI(uried)
+
            registerRatingText1.text=ratinged1.toString()
            registerRatingText2.text=ratinged2.toString()
-          // registerRatingBar1.rating=ratinged1
+
+        //  registerRatingBar1.rating=ratinged1.toFloat()
+        //   registerRatingBar2.rating=ratinged2.toFloat()
 
             dateShowText.text=time.timeData
         }
-
-        */
-
 
 
         val button=findViewById<ImageButton>(R.id.imageView)
