@@ -80,6 +80,7 @@ class MainActivity : AppCompatActivity() {
             create(DateFormat)
 
             val registerPage = Intent(this, RegisterActivity::class.java)
+           // registerPage.putExtra("today",DateFormat)
             startActivity(registerPage)
             finish()
 
@@ -98,6 +99,8 @@ class MainActivity : AppCompatActivity() {
         realm.executeTransaction {
             val task=it.createObject(Time::class.java,UUID.randomUUID().toString())
             task.timeData=content
+
+
         }
     }
 

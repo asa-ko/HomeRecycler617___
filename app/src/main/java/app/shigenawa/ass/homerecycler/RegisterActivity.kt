@@ -17,6 +17,7 @@ import java.util.*
 class RegisterActivity : AppCompatActivity() {
     val realm:Realm=Realm.getDefaultInstance()
 
+    var stringUri:String=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,16 +27,16 @@ class RegisterActivity : AppCompatActivity() {
         //var starNum1:Float
         //var starNum2:Float
 
-       val DataFormat  =SimpleDateFormat("yyyy/MM/dd", Locale.JAPAN).format(Date())
-      dateShowText.text=DataFormat.toString()
-        //saveDate(DataFormat)
+     //  val DataFormat  =SimpleDateFormat("yyyy/MM/dd", Locale.JAPAN).format(Date())
+         //val DataFormat=intent.getStringExtra("today")
+         //saveDate(DataFormat)
        // val dateGet=LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"))
 
        // dataText.text=todayDate()
         //mainDate()
 
 
-
+/*
        if(time!=null){
             val uried: Uri= Uri.parse(time.uri)
            val ratinged1:Float?=time.ratingValue1
@@ -50,7 +51,9 @@ class RegisterActivity : AppCompatActivity() {
         //   registerRatingBar2.rating=ratinged2.toFloat()
 
             dateShowText.text=time.timeData
-        }
+        }*/
+
+
 
 
         val button=findViewById<ImageButton>(R.id.imageView)
@@ -59,22 +62,24 @@ class RegisterActivity : AppCompatActivity() {
         }
 
        saveButton.setOnClickListener {
-            saveDate(DataFormat)
+           /* saveDate(DataFormat)
             saveRating(registerRatingBar1.rating,registerRatingBar2.rating)
             nextPage()
+            */
+           save(stringUri ,registerRatingBar1.rating,registerRatingBar2.rating)
+           Toast.makeText(applicationContext,"保存されました",Toast.LENGTH_SHORT).show()
         }
 
 
         backButton.setOnClickListener {
             val homePage=Intent(this,MainActivity::class.java)
 
-            homePage.putExtra("date",DataFormat)
+           // homePage.putExtra("date",DataFormat)
 
-            val task = Time(timeData = DataFormat.toString())
+           // val task = Time(timeData = DataFormat.toString())
 
             startActivity(homePage)
             finish()
-
 
         }
 
@@ -95,6 +100,17 @@ class RegisterActivity : AppCompatActivity() {
         realm.close()
     }
 
+    fun save(uri:String, value1:Float,value2:Float){
+        realm.executeTransaction {
+            val register=it.createObject(Time::class.java,UUID.randomUUID().toString())
+            register.uri=uri
+            register.ratingValue1=value1
+            register.ratingValue2=value2
+
+        }
+    }
+
+    /*
     fun saveDate(date: String){
         val time:Time?=read()
 
@@ -106,8 +122,8 @@ class RegisterActivity : AppCompatActivity() {
                 newdate.timeData=date
             }
         }
-        val showPage=Intent(this,ShowActivity::class.java)
-        showPage.putExtra("date",date)
+      //  val showPage=Intent(this,ShowActivity::class.java)
+      //  showPage.putExtra("date",date)
         //showPage.putExtra("imageUri",uri)
     }
 
@@ -136,6 +152,7 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
+
     fun saveRating(rating1:Float,rating2:Float){
         val time:Time?=read()
 
@@ -155,6 +172,8 @@ class RegisterActivity : AppCompatActivity() {
         showPage.putExtra("rating2",rating2)
         //showPage.putExtra("imageUri",uri)
     }
+
+     */
 
     fun nextPage(){
        val showPage=Intent(this,ShowActivity::class.java)
@@ -186,9 +205,9 @@ class RegisterActivity : AppCompatActivity() {
                              save(stringUri)
                          }
                          */
-                        val stringUri:String=uri.toString()
-                        saveUri(stringUri)
-
+                       // val stringUri:String=uri.toString()
+                       // saveUri(stringUri)
+                        stringUri=uri.toString()
 
 
                         val inputStream = contentResolver?.openInputStream(uri)
