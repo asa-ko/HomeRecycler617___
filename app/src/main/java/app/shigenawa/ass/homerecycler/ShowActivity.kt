@@ -4,9 +4,10 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.net.toUri
 import io.realm.Realm
-import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_register.backButton
+import kotlinx.android.synthetic.main.activity_register.dateShowText
+import kotlinx.android.synthetic.main.activity_show.*
 
 class ShowActivity : AppCompatActivity() {
     val realm: Realm = Realm.getDefaultInstance()
@@ -15,26 +16,28 @@ class ShowActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show)
 
-        val time: Time? = read()
-      //  val dateText = intent.getStringExtra("date")
-      //  val imageUri = intent.getStringExtra("uriStr")
+       // val intent=getIntent()
+        //val time: Time? = read()
+       val dateText= intent.getStringExtra("date")
+        val imageUri = intent.getStringExtra("uriStr")
      //   val uriStr=intent.getStringArrayListExtra("uriStr")
-     //   val value1=intent.getFloatExtra("value1")
-     //   val value2=intent.getFloatExtra("value2")
+        val value1=intent.getStringExtra("value1")
+        val value2=intent.getStringExtra("value2")
 
 
-       // val uri:Uri=Uri.parse(imageUri)
-       // imageView.setImageURI(uri)
+        dateShowText.text=dateText
 
-      /*  if(time!=null) {
-            val uried: Uri = Uri.parse(time.uri)
-            val dated:String?=time.timeData
+        val uri:Uri=Uri.parse(imageUri)
+        showImageView.setImageURI(uri)
 
-          //  dateShowText.text=dateText
-          //  imageView.setImageURI(uried)
-        }
+        val ratingValue1:Float=value1.toFloat()
+        val ratingValue2:Float=value2.toFloat()
 
-       */
+        ratingText1.text=value1
+        ratingText2.text=value2
+       ratingBar1.rating=ratingValue1
+        ratingBar2.rating=ratingValue2
+
 
 
         backButton.setOnClickListener {
@@ -43,8 +46,11 @@ class ShowActivity : AppCompatActivity() {
             finish()
         }
     }
+    /*
         fun read():Time?{
             return realm.where(Time::class.java).findFirst()
         }
+
+     */
 
 }

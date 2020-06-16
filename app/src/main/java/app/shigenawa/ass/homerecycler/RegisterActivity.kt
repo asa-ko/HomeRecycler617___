@@ -2,16 +2,14 @@ package app.shigenawa.ass.homerecycler
 
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_register.*
-import java.text.SimpleDateFormat
+import kotlinx.android.synthetic.main.activity_register.backButton
+import kotlinx.android.synthetic.main.activity_register.dateShowText
+import kotlinx.android.synthetic.main.activity_show.*
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
@@ -59,8 +57,8 @@ class RegisterActivity : AppCompatActivity() {
 
 
 
-        val button=findViewById<ImageButton>(R.id.imageView)
-        imageView.setOnClickListener {
+        val button=findViewById<ImageButton>(R.id.registerImageView)
+        registerImageView.setOnClickListener {
             selectPhoto()
         }
 
@@ -68,11 +66,15 @@ class RegisterActivity : AppCompatActivity() {
            //saveDate(DataFormat)
            // saveRating(registerRatingBar1.rating,registerRatingBar2.rating)
 
-           save(stringUri ,registerRatingBar1.rating,registerRatingBar2.rating)
+           save(stringUri ,registerRatingBar1.rating,registerRatingBar2.rating,DateFormat)
            Toast.makeText(applicationContext,"保存されました",Toast.LENGTH_SHORT).show()
 
          //  nextPage(stringUri,registerRatingBar1.rating,registerRatingBar2.rating)
-          nextPage()
+           val ratingFloat1:Float=registerRatingBar1.rating
+           val ratingFloat2:Float=registerRatingBar2.rating
+           val ratingString1:String=ratingFloat1.toString()
+           val ratingString2:String=ratingFloat2.toString()
+          nextPage(stringUri,ratingString1,ratingString2,DateFormat)
         }
 
 
@@ -105,14 +107,19 @@ class RegisterActivity : AppCompatActivity() {
         realm.close()
     }
 
-    fun save(uri:String, value1:Float,value2:Float){
+    fun save(uri:String, value1:Float,value2:Float,date:String){
         realm.executeTransaction {
             val register=it.createObject(Time::class.java,UUID.randomUUID().toString())
             register.uri=uri
             register.ratingValue1=value1
             register.ratingValue2=value2
+            register.timeData=date
 
         }
+      //  val nextPage=Intent(this,ShowActivity::class.java)
+      //  nextPage.putExtra("date",date)
+      //  nextPage.putExtra("value1",value1.toString())
+
     }
 
     /*
@@ -180,22 +187,23 @@ class RegisterActivity : AppCompatActivity() {
 
      */
 
-  /*  fun nextPage(uri: String,value1: Float,value2: Float){
+   fun nextPage(uri: String,value1: String,value2: String,date: String){
        val showPage=Intent(this,ShowActivity::class.java)
-        showPage.putExtra("uriStr",uri)
-        showPage.putExtra("value1",value1)
-        showPage.putExtra("value2",value2)
+       showPage.putExtra("date",date)
+       showPage.putExtra("uriStr",uri)
+       showPage.putExtra("value1",value1)
+       showPage.putExtra("value2",value2)
         startActivity(showPage)
         finish()
-    }*/
+    }
 
-    fun nextPage(){
+  /*  fun nextPage(){
         val showPage=Intent(this,ShowActivity::class.java)
     //    showPage.putExtra("uriStr",uri)
         startActivity(showPage)
         finish()
     }
-
+   */
 
 
 
@@ -227,7 +235,7 @@ class RegisterActivity : AppCompatActivity() {
 
                         val inputStream = contentResolver?.openInputStream(uri)
                         val image = BitmapFactory.decodeStream(inputStream)
-                        val imageView = findViewById<ImageView>(R.id.imageView)
+                        val imageView = findViewById<ImageView>(R.id.registerImageView)
                         imageView.setImageBitmap(image)
 
                     }

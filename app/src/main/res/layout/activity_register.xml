@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <ImageButton
-        android:id="@+id/imageView"
+        android:id="@+id/registerImageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="44dp"
@@ -30,7 +30,7 @@
         android:layout_marginBottom="36dp"
         android:text="月日"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/registerImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -76,7 +76,7 @@
         app:layout_constraintEnd_toStartOf="@+id/registerRatingBar1"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/registerImageView" />
 
     <TextView
         android:id="@+id/RatingTextView2"

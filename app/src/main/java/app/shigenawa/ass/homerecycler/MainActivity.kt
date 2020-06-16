@@ -65,7 +65,12 @@ class MainActivity : AppCompatActivity() {
             object : HomeAdapter.OnButtonClickListener{
                 override fun Transition(item: Time) {
                     Toast.makeText(applicationContext,item.timeData+"を表示します",Toast.LENGTH_SHORT).show()
-                    trans(item.id)
+
+                    val ratingValueString1:String=item.ratingValue1.toString()
+                    val ratingValueString2:String=item.ratingValue2.toString()
+                    val dateString:String=item.timeData.toString()
+                    val uriString:String=item.uri.toString()
+                    trans(dateString,uriString,ratingValueString1,ratingValueString2)
                 }
             })
 
@@ -77,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
         addButton.setOnClickListener {
 
-            create(DateFormat)
+          //  create(DateFormat)
             Toast.makeText(applicationContext,DateFormat+"を追加",Toast.LENGTH_SHORT).show()
 
            val registerPage = Intent(this, RegisterActivity::class.java)
@@ -146,9 +151,14 @@ class MainActivity : AppCompatActivity() {
         return realm.where(app.shigenawa.ass.homerecycler.Time::class.java).findFirst()
     }
 
-    fun trans(id:String){
+    fun trans(date:String,uri:String,value1:String,value2:String){
         val DataPage=Intent(this,DataShowActivity::class.java)
+        DataPage.putExtra("date",date)
+        DataPage.putExtra("uri",uri)
+        DataPage.putExtra("value1",value1)
+        DataPage.putExtra("value2",value2)
         startActivity(DataPage)
         finish()
     }
+
 }

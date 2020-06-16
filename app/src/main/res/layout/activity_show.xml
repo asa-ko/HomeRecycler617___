@@ -8,19 +8,16 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/showImageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="103dp"
-        android:layout_marginEnd="49dp"
-        android:layout_marginBottom="103dp"
-        android:background="#80FFFFFF"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/ratingBar2"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="67dp"
+        app:layout_constraintBottom_toTopOf="@id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/dateShowText" />
 
     <TextView
         android:id="@+id/dateShowText"
@@ -71,18 +68,19 @@
         android:id="@+id/ratingBar1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
         android:layout_marginBottom="29dp"
         android:numStars="5"
         android:stepSize="0.5"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="@+id/ratingBar2" />
+        app:layout_constraintEnd_toStartOf="@+id/ratingText1" />
 
     <RatingBar
         android:id="@+id/ratingBar2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="3dp"
         android:numStars="5"
         android:stepSize="0.5"
         app:layout_constraintEnd_toStartOf="@+id/ratingText2"
@@ -92,25 +90,24 @@
     <TextView
         android:id="@+id/ratingText2"
         android:layout_width="wrap_content"
-        android:layout_height="21dp"
-        android:layout_marginTop="73dp"
-        android:layout_marginBottom="83dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
         android:text="0.0"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ratingBar2"
-        app:layout_constraintTop_toTopOf="@+id/ratingText1" />
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/ratingText1"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
-        android:layout_marginTop="62dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="62dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="23dp"
         android:text="0.0"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/ratingBar2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="@+id/ratingBar1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
