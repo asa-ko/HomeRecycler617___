@@ -16,16 +16,25 @@ class ShowActivity : AppCompatActivity() {
         setContentView(R.layout.activity_show)
 
         val time: Time? = read()
-        //val dateText = intent.getStringExtra("date")
-        //val imageUri = intent.getStringExtra("imageUri")
+      //  val dateText = intent.getStringExtra("date")
+      //  val imageUri = intent.getStringExtra("uriStr")
+     //   val uriStr=intent.getStringArrayListExtra("uriStr")
+     //   val value1=intent.getFloatExtra("value1")
+     //   val value2=intent.getFloatExtra("value2")
 
-        if(time!=null) {
+
+       // val uri:Uri=Uri.parse(imageUri)
+       // imageView.setImageURI(uri)
+
+      /*  if(time!=null) {
             val uried: Uri = Uri.parse(time.uri)
             val dated:String?=time.timeData
 
           //  dateShowText.text=dateText
           //  imageView.setImageURI(uried)
         }
+
+       */
 
 
         backButton.setOnClickListener {

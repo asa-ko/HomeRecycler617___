@@ -27,6 +27,9 @@ class RegisterActivity : AppCompatActivity() {
         //var starNum1:Float
         //var starNum2:Float
 
+        val DateFormat=intent.getStringExtra("today")
+        dateShowText.text=DateFormat
+
      //  val DataFormat  =SimpleDateFormat("yyyy/MM/dd", Locale.JAPAN).format(Date())
          //val DataFormat=intent.getStringExtra("today")
          //saveDate(DataFormat)
@@ -62,12 +65,14 @@ class RegisterActivity : AppCompatActivity() {
         }
 
        saveButton.setOnClickListener {
-           /* saveDate(DataFormat)
-            saveRating(registerRatingBar1.rating,registerRatingBar2.rating)
-            nextPage()
-            */
+           //saveDate(DataFormat)
+           // saveRating(registerRatingBar1.rating,registerRatingBar2.rating)
+
            save(stringUri ,registerRatingBar1.rating,registerRatingBar2.rating)
            Toast.makeText(applicationContext,"保存されました",Toast.LENGTH_SHORT).show()
+
+         //  nextPage(stringUri,registerRatingBar1.rating,registerRatingBar2.rating)
+          nextPage()
         }
 
 
@@ -175,8 +180,18 @@ class RegisterActivity : AppCompatActivity() {
 
      */
 
-    fun nextPage(){
+  /*  fun nextPage(uri: String,value1: Float,value2: Float){
        val showPage=Intent(this,ShowActivity::class.java)
+        showPage.putExtra("uriStr",uri)
+        showPage.putExtra("value1",value1)
+        showPage.putExtra("value2",value2)
+        startActivity(showPage)
+        finish()
+    }*/
+
+    fun nextPage(){
+        val showPage=Intent(this,ShowActivity::class.java)
+    //    showPage.putExtra("uriStr",uri)
         startActivity(showPage)
         finish()
     }

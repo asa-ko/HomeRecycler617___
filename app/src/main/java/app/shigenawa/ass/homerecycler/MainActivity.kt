@@ -78,16 +78,18 @@ class MainActivity : AppCompatActivity() {
         addButton.setOnClickListener {
 
             create(DateFormat)
+            Toast.makeText(applicationContext,DateFormat+"を追加",Toast.LENGTH_SHORT).show()
 
-            val registerPage = Intent(this, RegisterActivity::class.java)
-           // registerPage.putExtra("today",DateFormat)
+           val registerPage = Intent(this, RegisterActivity::class.java)
+            registerPage.putExtra("today",DateFormat)
             startActivity(registerPage)
             finish()
 
-         /* val task = Time(timeData = DataFormat.toString())
-            adapter.addItem(task)
 
-          */
+        //  val task = Time(timeData = DataFormat.toString())
+         //   adapter.addItem(task)
+
+
 
             //    Snackbar.make(addButton, "Content is empty", Snackbar.LENGTH_SHORT).show()
 
@@ -99,8 +101,6 @@ class MainActivity : AppCompatActivity() {
         realm.executeTransaction {
             val task=it.createObject(Time::class.java,UUID.randomUUID().toString())
             task.timeData=content
-
-
         }
     }
 
@@ -147,7 +147,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun trans(id:String){
-        val DataPage=Intent(this,ShowActivity::class.java)
+        val DataPage=Intent(this,DataShowActivity::class.java)
         startActivity(DataPage)
         finish()
     }
