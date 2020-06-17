@@ -38,7 +38,7 @@ class DataShowActivity : AppCompatActivity() {
         */
         val positionString=intent.getStringExtra("position")
         val position:Int=positionString.toInt()
-
+            series(position)
        // val time=read(position)
        // show(time)
 
@@ -84,25 +84,26 @@ class DataShowActivity : AppCompatActivity() {
     fun series(position:Int){
         val list=read()
        val time=list.get(position)
-        
-        val dateText:String=time.timeData.toString()
-        val imageUri:String=time.uri.toString()
-        val value1:String=time.ratingValue1.toString()
-        val value2:String=time.ratingValue2.toString()
-        //  val id:String=""
 
-        dateShowText.text=dateText
 
-        val uri:Uri=Uri.parse(imageUri)
-        dateShowImageView.setImageURI(uri)
+            val dateText: String = time?.timeData.toString()
+            val imageUri: String = time?.uri.toString()
+            val value1: String = time?.ratingValue1.toString()
+            val value2: String = time?.ratingValue2.toString()
 
-        val ratingValue1:Float=value1.toFloat()
-        val ratingValue2:Float=value2.toFloat()
 
-        ratingText1.text=value1
-        ratingText2.text=value2
-        ratingBar11.rating=ratingValue1
-        ratingBar22.rating=ratingValue2
+            dateShowText.text = dateText
+
+            val uri: Uri = Uri.parse(imageUri)
+            dateShowImageView.setImageURI(uri)
+
+            val ratingValue1: Float = value1.toFloat()
+            val ratingValue2: Float = value2.toFloat()
+
+            ratingText1.text = value1
+            ratingText2.text = value2
+            ratingBar11.rating = ratingValue1
+            ratingBar22.rating = ratingValue2
 
        // show(time)
     }
