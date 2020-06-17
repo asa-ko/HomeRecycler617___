@@ -13,6 +13,7 @@ import io.realm.Sort
 import io.realm.kotlin.createObject
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.home_data.*
+import java.text.FieldPosition
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
        Realm.getDefaultInstance()
    }
 
-   val DateFormat  = SimpleDateFormat("yyyy/MM/dd", Locale.JAPANESE).format(Date())
+   val DateFormat  = SimpleDateFormat("yyyy/MM/dd", Locale.JAPAN).format(Date())
    // var DateFormat:String="aaa"
 
     // val dateText=intent.getStringExtra("date")
@@ -47,10 +48,12 @@ class MainActivity : AppCompatActivity() {
 
         val taskList=readAll()
 
-
+/*
         if(taskList.isEmpty()){
             create(DateFormat)
         }
+
+ */
 
        // val adapter=HomeAdapter( this,taskList,true)
 
@@ -63,14 +66,15 @@ class MainActivity : AppCompatActivity() {
                 }
             }, true,
             object : HomeAdapter.OnButtonClickListener{
-                override fun Transition(item: Time) {
+                override fun Transition(item: Time,position:Int) {
                     Toast.makeText(applicationContext,item.timeData+"を表示します",Toast.LENGTH_SHORT).show()
 
+                    val turn:Int=position
                     val ratingValueString1:String=item.ratingValue1.toString()
                     val ratingValueString2:String=item.ratingValue2.toString()
                     val dateString:String=item.timeData.toString()
                     val uriString:String=item.uri.toString()
-                    trans(dateString,uriString,ratingValueString1,ratingValueString2)
+                   // trans(dateString,uriString,ratingValueString1,ratingValueString2,item.id)
                 }
             })
 
@@ -151,12 +155,21 @@ class MainActivity : AppCompatActivity() {
         return realm.where(app.shigenawa.ass.homerecycler.Time::class.java).findFirst()
     }
 
-    fun trans(date:String,uri:String,value1:String,value2:String){
+    fun trans(date:String,uri:String,value1:String,value2:String,id: String){
         val DataPage=Intent(this,DataShowActivity::class.java)
         DataPage.putExtra("date",date)
         DataPage.putExtra("uri",uri)
         DataPage.putExtra("value1",value1)
         DataPage.putExtra("value2",value2)
+        DataPage.putExtra("id",id)
+        startActivity(DataPage)
+        finish()
+    }
+
+    fun transPosition(position: Int){
+        val DataPage=Intent(this,DataShowActivity::class.java)
+        val positionString:String=position.toString()
+        DataPage.putExtra("position",positionString)
         startActivity(DataPage)
         finish()
     }

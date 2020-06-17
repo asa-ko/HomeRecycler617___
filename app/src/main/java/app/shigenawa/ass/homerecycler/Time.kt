@@ -8,10 +8,9 @@ import java.util.*
 
  open class Time(
     @PrimaryKey open var id: String=UUID.randomUUID().toString(),
-   //open var imageId: Int=0,
-   // open var dataId: String ="",
+
      open var uri:String?=null,  //画像のuriの文字化
-   // public open var timeData: Date=Date(System.currentTimeMillis())
+
      open var timeData:String?=null,  //日付
 
      open var ratingValue1:Float?=null, //きれいさ評価の値
@@ -19,6 +18,6 @@ import java.util.*
 
     open var createdAt: Date=Date(System.currentTimeMillis())
 
-    //public open var item:List<>             //recyclerviewのitemを保存したい
+
 
 ) :RealmObject()
