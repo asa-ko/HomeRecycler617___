@@ -70,10 +70,10 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext,item.timeData+"を表示します",Toast.LENGTH_SHORT).show()
 
                     val turn:Int=position
-                    val ratingValueString1:String=item.ratingValue1.toString()
-                    val ratingValueString2:String=item.ratingValue2.toString()
-                    val dateString:String=item.timeData.toString()
-                    val uriString:String=item.uri.toString()
+                    //val ratingValueString1:String=item.ratingValue1.toString()
+                   // val ratingValueString2:String=item.ratingValue2.toString()
+                   // val dateString:String=item.timeData.toString()
+                   // val uriString:String=item.uri.toString()
                    // trans(dateString,uriString,ratingValueString1,ratingValueString2,item.id)
                    transPosition(position)
                 }
