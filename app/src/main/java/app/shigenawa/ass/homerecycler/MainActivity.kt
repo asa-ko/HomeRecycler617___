@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         val dateText=intent.getStringExtra("date")
 
-        val time:Time?=read()
+  //      val time:Time?=read()
        /* if(time!=null){
             DateFormat=time.timeData
         }
@@ -55,10 +55,9 @@ class MainActivity : AppCompatActivity() {
 
  */
 
-       // val adapter=HomeAdapter( this,taskList,true)
-
         val adapter =
-            HomeAdapter(this, taskList, object : HomeAdapter.OnItemClickListener {
+            HomeAdapter(this, taskList,
+                object : HomeAdapter.OnItemClickListener {
                 override fun onItemClick(item: Time) {
                     // クリック時の処理
                     Toast.makeText(applicationContext, item.timeData + "を削除しました", Toast.LENGTH_SHORT).show()
@@ -66,7 +65,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }, true,
             object : HomeAdapter.OnButtonClickListener{
-                override fun Transition(item: Time,position:Int) {
+              override fun Transition(item: Time,position:Int) {
+               //     override fun Transition(item: Time) {
                     Toast.makeText(applicationContext,item.timeData+"を表示します",Toast.LENGTH_SHORT).show()
 
                     val turn:Int=position
@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity() {
                     val dateString:String=item.timeData.toString()
                     val uriString:String=item.uri.toString()
                    // trans(dateString,uriString,ratingValueString1,ratingValueString2,item.id)
+                   transPosition(position)
                 }
             })
 

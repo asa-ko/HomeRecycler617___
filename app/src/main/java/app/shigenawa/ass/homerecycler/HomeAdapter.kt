@@ -39,6 +39,7 @@ class HomeAdapter(
 
         holder.showButton.setOnClickListener {
                 transitioner.Transition(item,position)
+            //transitioner.Transition(item)
         }
 
         holder.dataText.setText(item.timeData)
@@ -66,9 +67,16 @@ class HomeAdapter(
     }
 
     */
+
    interface OnButtonClickListener{
        fun Transition(item: Time,position:Int)
    }
+/*
+   interface OnButtonClickListener{
+       fun Transition(item: Time)
+   }
+
+     */
 
 
 
