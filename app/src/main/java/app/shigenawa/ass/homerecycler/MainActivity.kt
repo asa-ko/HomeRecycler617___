@@ -1,6 +1,7 @@
 package app.shigenawa.ass.homerecycler
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity() {
 
  */
 
+
         val adapter =
             HomeAdapter(this, taskList,
                 object : HomeAdapter.OnItemClickListener {
@@ -94,6 +96,12 @@ class MainActivity : AppCompatActivity() {
             registerPage.putExtra("today",DateFormat)
             startActivity(registerPage)
             finish()
+
+           /* if(DateFormat.toInt()%2==0){
+            itemConstrainLayout.setBackgroundColor(Color.rgb(195,253,255))
+        }
+
+            */
 
 
         //  val task = Time(timeData = DataFormat.toString())

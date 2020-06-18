@@ -40,6 +40,8 @@ class DataShowActivity : AppCompatActivity() {
         var nextDayPosition:Int
         var yesterdayPosition:Int
 
+        val list=read()
+        val positionMax:Int=list.size
        // val time=read(position)
        // show(time)
 
@@ -77,13 +79,15 @@ class DataShowActivity : AppCompatActivity() {
         yesterdayButton.setOnClickListener {
             //yesterdayAction(position)
 
-            val list=read()
+           // val list=read()
             //val time=list.get(position)
-            if(position==18){
+            position=position+1
+            if(position==positionMax){
+                yesterdayButton.visibility=View.INVISIBLE
                 Toast.makeText(applicationContext,"これより古いデータはありません", Toast.LENGTH_SHORT).show()
-            }else{
+            }else
            series(position)
-            position=position+1 }       /*     yesterdayButton.setOnClickListener {
+                 /*     yesterdayButton.setOnClickListener {
                 yesterdayPosition=yesterdayPosition+1
                 // show(yesterdayPosition)
                 series(yesterdayPosition)
@@ -133,7 +137,8 @@ class DataShowActivity : AppCompatActivity() {
 
       if(time?.uri!=null) {
             val uriData: Uri = Uri.parse(imageUri)
-          //dateShowImageView.setImageURI(uriData)
+         // dateShowImageView.setImageURI(uriData)
+          dateShowImageView.setImageURI(uriData)
         }
 
 

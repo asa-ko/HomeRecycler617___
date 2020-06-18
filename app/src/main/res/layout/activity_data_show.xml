@@ -1,130 +1,248 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
-    android:background="#71EDEB"
+
+    android:background="#90CAF9"
+
     tools:context=".MainActivity">
 
+
     <ImageView
+
         android:id="@+id/dateShowImageView"
+
         android:layout_width="0dp"
+
         android:layout_height="0dp"
+
         android:layout_marginStart="65dp"
+
         android:layout_marginTop="68dp"
+
         android:layout_marginEnd="65dp"
+
         android:layout_marginBottom="133dp"
+
         app:layout_constraintBottom_toTopOf="@+id/textView2"
+
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
+
         android:id="@+id/dateShowText"
+
         android:layout_width="wrap_content"
+
         android:layout_height="wrap_content"
+
         android:layout_marginTop="16dp"
+
         android:text="月日"
+
         android:textSize="24sp"
+
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
+
         android:id="@+id/backButton"
+
         android:layout_width="wrap_content"
+
         android:layout_height="wrap_content"
+
         android:layout_marginStart="26dp"
+
         android:layout_marginBottom="16dp"
+
         android:background="#E3C5FB"
+
         android:text="戻る"
+
         app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <TextView
+
         android:id="@+id/textView"
+
         android:layout_width="wrap_content"
+
         android:layout_height="wrap_content"
+
         android:layout_marginStart="26dp"
+
         android:layout_marginBottom="32dp"
+
         android:text="きれいさ"
-        android:textSize="16sp"
+
+        android:textSize="14sp"
+
         app:layout_constraintBottom_toTopOf="@+id/textView2"
+
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <TextView
+
         android:id="@+id/textView2"
+
         android:layout_width="wrap_content"
+
         android:layout_height="wrap_content"
+
         android:layout_marginBottom="94dp"
+
         android:text="きのうからの維持"
-        android:textSize="16sp"
+
+        android:textSize="14sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toStartOf="@+id/ratingBar22"
+
         app:layout_constraintHorizontal_chainStyle="packed"
+
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toBottomOf="@+id/dateShowImageView" />
 
+
     <TextView
+
         android:id="@+id/ratingText2"
+
         android:layout_width="wrap_content"
+
         android:layout_height="0dp"
+
         android:layout_marginEnd="16dp"
+
         android:text="0.0"
+
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
+
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toEndOf="@+id/ratingBar22"
+
         app:layout_constraintTop_toTopOf="@+id/textView2" />
 
+
     <TextView
+
         android:id="@+id/ratingText1"
+
         android:layout_width="wrap_content"
+
         android:layout_height="21dp"
+
         android:layout_marginStart="7dp"
+
         android:layout_marginTop="22dp"
+
         android:layout_marginBottom="21dp"
+
         android:text="0.0"
+
         app:layout_constraintBottom_toTopOf="@+id/ratingBar22"
+
         app:layout_constraintStart_toEndOf="@+id/ratingBar11"
+
         app:layout_constraintTop_toTopOf="@+id/ratingBar11" />
 
+
     <RatingBar
+
         android:id="@+id/ratingBar11"
+
         android:layout_width="wrap_content"
+
         android:layout_height="wrap_content"
+
         android:layout_marginBottom="29dp"
+
         app:layout_constraintBottom_toTopOf="@+id/textView2"
+
         app:layout_constraintStart_toStartOf="@+id/ratingBar22" />
 
+
     <RatingBar
+
         android:id="@+id/ratingBar22"
+
         android:layout_width="wrap_content"
+
         android:layout_height="wrap_content"
+
         android:layout_marginTop="7dp"
+
         android:layout_marginEnd="7dp"
+
         app:layout_constraintEnd_toStartOf="@+id/ratingText2"
+
         app:layout_constraintStart_toEndOf="@+id/textView2"
+
         app:layout_constraintTop_toBottomOf="@+id/ratingBar11" />
 
+
     <Button
+
         android:id="@+id/nextdayButton"
+
         android:layout_width="wrap_content"
+
         android:layout_height="wrap_content"
+
         android:layout_marginStart="17dp"
+
         android:layout_marginBottom="4dp"
+
+        android:background="#fff1ff"
+
         android:text="次の日"
         app:layout_constraintBottom_toTopOf="@+id/dateShowImageView"
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <Button
+
         android:id="@+id/yesterdayButton"
+
         android:layout_width="wrap_content"
+
         android:layout_height="wrap_content"
+
         android:layout_marginTop="14dp"
+
         android:layout_marginEnd="7dp"
+
+        android:background="#af8eb5"
+
         android:text="前の日"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

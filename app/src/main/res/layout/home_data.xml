@@ -6,12 +6,12 @@
 
     xmlns:tools="http://schemas.android.com/tools"
 
+    android:id="@+id/itemConstrainLayout"
+
     android:layout_width="match_parent"
 
     android:layout_height="100dp"
-
-    android:background="#90CAF9">
-
+    android:background="#5D99C6">
 
 
     <TextView
@@ -35,7 +35,6 @@
         app:layout_constraintStart_toStartOf="parent"
 
         app:layout_constraintTop_toTopOf="parent" />
-
 
 
     <Button
@@ -88,7 +87,6 @@
         app:layout_constraintStart_toEndOf="@+id/showButton"
 
         app:layout_constraintTop_toTopOf="parent" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

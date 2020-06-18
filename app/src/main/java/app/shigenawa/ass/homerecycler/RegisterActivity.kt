@@ -65,16 +65,20 @@ class RegisterActivity : AppCompatActivity() {
        saveButton.setOnClickListener {
            //saveDate(DataFormat)
            // saveRating(registerRatingBar1.rating,registerRatingBar2.rating)
+           if(stringUri.isEmpty()){
+               Toast.makeText(applicationContext,"画像を選択してください",Toast.LENGTH_SHORT).show()
+           }else {
+               save(stringUri, registerRatingBar1.rating, registerRatingBar2.rating, DateFormat)
+               Toast.makeText(applicationContext, "保存されました", Toast.LENGTH_SHORT).show()
 
-           save(stringUri ,registerRatingBar1.rating,registerRatingBar2.rating,DateFormat)
-           Toast.makeText(applicationContext,"保存されました",Toast.LENGTH_SHORT).show()
+               //  nextPage(stringUri,registerRatingBar1.rating,registerRatingBar2.rating)
+               val ratingFloat1: Float = registerRatingBar1.rating
+               val ratingFloat2: Float = registerRatingBar2.rating
+               val ratingString1: String = ratingFloat1.toString()
+               val ratingString2: String = ratingFloat2.toString()
 
-         //  nextPage(stringUri,registerRatingBar1.rating,registerRatingBar2.rating)
-           val ratingFloat1:Float=registerRatingBar1.rating
-           val ratingFloat2:Float=registerRatingBar2.rating
-           val ratingString1:String=ratingFloat1.toString()
-           val ratingString2:String=ratingFloat2.toString()
-          nextPage(stringUri,ratingString1,ratingString2,DateFormat)
+               nextPage(stringUri, ratingString1, ratingString2, DateFormat)
+           }
         }
 
 
