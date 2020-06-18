@@ -24,14 +24,7 @@ class MainActivity : AppCompatActivity() {
    private val realm: Realm by lazy {
        Realm.getDefaultInstance()
    }
-
-   val DateFormat  = SimpleDateFormat("yyyy/MM/dd", Locale.JAPAN).format(Date())
-   // var DateFormat:String="aaa"
-
-    // val dateText=intent.getStringExtra("date")
-    //val date1=dateText.toString()
-    // val time:Time?=read()
-    //   val todayDate: String? = time.timeData
+    val DateFormat  = SimpleDateFormat("yyyy/MM/dd", Locale.JAPAN).format(Date())
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,21 +33,10 @@ class MainActivity : AppCompatActivity() {
 
         val dateText=intent.getStringExtra("date")
 
-  //      val time:Time?=read()
-       /* if(time!=null){
-            DateFormat=time.timeData
-        }
-
-        */
 
         val taskList=readAll()
 
-/*
-        if(taskList.isEmpty()){
-            create(DateFormat)
-        }
 
- */
 
 
         val adapter =
@@ -97,19 +79,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(registerPage)
             finish()
 
-           /* if(DateFormat.toInt()%2==0){
-            itemConstrainLayout.setBackgroundColor(Color.rgb(195,253,255))
-        }
-
-            */
-
-
-        //  val task = Time(timeData = DataFormat.toString())
-         //   adapter.addItem(task)
-
-
-
-            //    Snackbar.make(addButton, "Content is empty", Snackbar.LENGTH_SHORT).show()
 
         }
 
